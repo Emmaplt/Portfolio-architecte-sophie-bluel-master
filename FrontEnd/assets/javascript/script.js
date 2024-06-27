@@ -18,7 +18,6 @@ function fetchData() {
                 let work = data[i];
                 console.log(work);
                 console.log(work.title);
-
                 /*
                 <figure>
                     <img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
