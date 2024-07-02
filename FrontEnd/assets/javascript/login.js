@@ -22,6 +22,10 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
         const data = await response.json();
 
+        //Connexion réussi, stocker le jeton de connexion
+        localStorage.setItem('authToken', data.token);
+
+        //Redirection ver index.html
         window.location.href = './index.html';
     } catch (error) {
         errorDiv.textContent = error.message;
