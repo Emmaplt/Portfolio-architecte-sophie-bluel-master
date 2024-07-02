@@ -28,19 +28,20 @@
 	<main>
 		<div class="login">
 			<h2>Log In</h2>
-			<form>
+			<form id="loginForm">
 				<div class="formdiv">
-					<label for="email" name="email" required>E-mail</label>
-					<input type="email">
+					<label for="email">E-mail</label>
+					<input type="email" id="email" name="email" required>
 				</div>
 				<div class="formdiv">
-					<label for="password" name="motdepasse" required>Mot de passe</label>
-					<input type="password">
+					<label for="password" required>Mot de passe</label>
+					<input type="password" id="password" name="motdepasse" required>
 				</div>
 				<div class="formdiv">
 					<input type="submit" value="Se connecter">
 				</div>
 			</form>
+			<div id="error" class="error-message"></div>
 			<a href=#>Mot de passe oublié</a>
 		</div>
 	</main>
