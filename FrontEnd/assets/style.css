@@ -282,10 +282,9 @@ footer nav ul {
 	color: white;
 	background-color: black;
 	position: fixed;
-	top:0;
+	top: 0;
 	width: 100%;
-	left : 0;
+	left: 0;
 	height: 30px;
 	gap: 10px;
 }
-
