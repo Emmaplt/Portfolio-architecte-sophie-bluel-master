@@ -5,7 +5,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     const password = document.getElementById('password').value;
     const errorDiv = document.getElementById('error');
 
-    errorDiv.textContent = ''; //Clear previous error message
+    errorDiv.textContent = ''; //Effacer le message d'erreur précédent
 
     try {
         const response = await fetch('http://localhost:5678/api/users/login', {
