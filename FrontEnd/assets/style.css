@@ -314,3 +314,13 @@ footer nav ul {
     color: black;
     text-decoration: none;
 }
+
+/* Bouton lougout */
+
+.logout {
+	color: black;
+}
+
+.logout:hover {
+	color:#B1663C;
+}
