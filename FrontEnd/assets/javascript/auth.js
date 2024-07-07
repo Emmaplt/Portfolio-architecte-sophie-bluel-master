@@ -19,6 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
             editBar.style.display = 'flex';
         }
 
+        //Ajout du bouton modifier
+        const buttonModifier = document.getElementById('button-modifier')
+        if (buttonModifier) {
+            buttonModifier.style.display = 'flex';
+        }
+
         //Masquer les filtres
         const filtersContainer = document.getElementById('filters');
         if (filtersContainer) {
