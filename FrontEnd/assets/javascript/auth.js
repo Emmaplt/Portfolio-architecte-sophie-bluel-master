@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', function() {
             filtersContainer.style.display = 'none';
         }
 
+        //Appel à la fonction modal
+        initializeModal()
+
         //Ajouter ou modifier des éléments spécifiques pour les utilisateurs connectés
         // addConnectedUserElements();
 
@@ -39,4 +42,48 @@ document.addEventListener('DOMContentLoaded', function() {
         nomElement.href = './login.html';
     }
 });
+
+//Fonction de création de fonctionnalité de ma page modal 
+function initializeModal() {
+
+    let modal = null;
+
+    //Ouvrir la page modal
+    const openModal = function (e) {
+        e.preventDefault();
+        modal = document.querySelector(e.target.getAttribute('href'));
+        if (modal) {
+            modal.style.display = 'flex';
+            modal.removeAttribute('aria-hidden');
+            modal.setAttribute('aria-modal', 'true');
+            modal.addEventListener('click', closeModal);
+            modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
+            modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
+        } else {
+            console.error('Modal target not found');
+        }
+    }
+
+    //Fermer la page modal
+    const closeModal = function (e) {
+        e.preventDefault()
+        if (modal === null) return
+            modal.style.display = 'none';
+            modal.setAttribute('aria-modal', 'true');
+            modal.removeAttribute('aria-hidden');
+            modal.removeEventListener('click', closeModal);
+            modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
+            modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
+            modal = null;
+    }
+
+    //Eviter de fermer dans la modal
+    const stopPropagation = function (e) {
+        e.stopPropagation()
+    }
+
+    document.querySelectorAll('.js-modal').forEach(a => {
+        a.addEventListener('click', openModal);
+    });
+}
 
