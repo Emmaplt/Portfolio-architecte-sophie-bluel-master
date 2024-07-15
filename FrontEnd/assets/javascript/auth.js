@@ -46,19 +46,17 @@ document.addEventListener('DOMContentLoaded', function() {
 //Fonction de création de fonctionnalité de ma page modal 
 function initializeModal() {
 
-    let modal = null;
+    let modal = document.querySelector("#modal1");
+ 
 
     //Ouvrir la page modal
     const openModal = function (e) {
         e.preventDefault();
-        modal = document.querySelector(e.target.getAttribute('href'));
+
         if (modal) {
             modal.style.display = 'flex';
             modal.removeAttribute('aria-hidden');
             modal.setAttribute('aria-modal', 'true');
-            modal.addEventListener('click', closeModal);
-            modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
-            modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
         } else {
             console.error('Modal target not found');
         }
@@ -71,10 +69,6 @@ function initializeModal() {
             modal.style.display = 'none';
             modal.setAttribute('aria-modal', 'true');
             modal.removeAttribute('aria-hidden');
-            modal.removeEventListener('click', closeModal);
-            modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
-            modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
-            modal = null;
     }
 
     //Eviter de fermer dans la modal
@@ -82,8 +76,29 @@ function initializeModal() {
         e.stopPropagation()
     }
 
+    modal.addEventListener('click', closeModal);
+    modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
+    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
+
     document.querySelectorAll('.js-modal').forEach(a => {
         a.addEventListener('click', openModal);
     });
 }
 
+
+// Supprimer le work
+function deleteWork(id) {
+    fetch(`${api}/works/${id}`, {
+        method: "DELETE",
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            fetchData();
+        } else {
+            console.error('Failed to delete work');
+        }
+    });
+}

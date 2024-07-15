@@ -12,6 +12,9 @@ function fetchData() {
             console.log(data);
             // Définit le point de montage des éléments
             const gallery = document.querySelector(".gallery");
+            const modalGallery = document.querySelector(".modal .gallery-modal");
+            modalGallery.innerHTML = ""; // Efface le contenu précédent
+            gallery.innerHTML = "";
             // Boucle sur les éléments
             for (let i in data) {
                 // Défini le work en fonction de l'indice i
@@ -41,6 +44,23 @@ function fetchData() {
                 // Créer un texte node et Afficher en appendChild dans figure
                 let element = document.createTextNode(work.title);
                 figure.appendChild(element);
+
+                figure = document.createElement("figure");
+                figure.dataset.id = work.id;
+
+                image = document.createElement("img");
+                image.src = work.imageUrl;
+                image.alt = work.title;
+                figure.appendChild(image);
+
+                let deleteIcon = document.createElement("i");
+                deleteIcon.className = "fa-solid fa-trash";
+                deleteIcon.addEventListener("click", function () {
+                    deleteWork(work.id);
+                });
+                figure.appendChild(deleteIcon);
+
+                modalGallery.appendChild(figure);
 
             }
         })
