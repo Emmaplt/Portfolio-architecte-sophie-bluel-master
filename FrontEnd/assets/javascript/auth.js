@@ -85,7 +85,6 @@ function initializeModal() {
     });
 }
 
-
 // Supprimer le work
 function deleteWork(id) {
     fetch(`${api}/works/${id}`, {

@@ -53,8 +53,9 @@ function fetchData() {
                 image.alt = work.title;
                 figure.appendChild(image);
 
+                //Appel la fonction supprimé des works
                 let deleteIcon = document.createElement("i");
-                deleteIcon.className = "fa-solid fa-trash";
+                deleteIcon.className = "fa-solid fa-trash white-icone";
                 deleteIcon.addEventListener("click", function () {
                     deleteWork(work.id);
                 });
