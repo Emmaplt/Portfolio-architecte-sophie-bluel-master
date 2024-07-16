@@ -32,7 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         //Appel à la fonction modal
-        initializeModal()
+        initializeGalleryModal()
+        initializeAddPhotoModal();
 
         //Ajouter ou modifier des éléments spécifiques pour les utilisateurs connectés
         // addConnectedUserElements();
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 //Fonction de création de fonctionnalité de ma page modal 
-function initializeModal() {
+function initializeGalleryModal() {
 
     let modal = document.querySelector("#modal1");
  
@@ -83,6 +84,42 @@ function initializeModal() {
     document.querySelectorAll('.js-modal').forEach(a => {
         a.addEventListener('click', openModal);
     });
+}
+
+// Fonction pour initialiser la modale d'ajout de photo
+function initializeAddPhotoModal() {
+    const addPhotoModal = document.querySelector("#modal-add-photo");
+    const openAddPhotoButton = document.querySelector(".js-open-add-photo-modal");
+
+    // Vérifier si la modal et le bouton existent
+    if (!addPhotoModal || !openAddPhotoButton) {
+        console.error('Add photo modal or open button not found');
+        return;
+    }
+
+    const openAddPhotoModal = function (e) {
+        e.preventDefault();
+        addPhotoModal.style.display = 'flex';
+        addPhotoModal.removeAttribute('aria-hidden');
+        addPhotoModal.setAttribute('aria-modal', 'true');
+    };
+
+    const closeAddPhotoModal = function (e) {
+        e.preventDefault();
+        addPhotoModal.style.display = 'none';
+        addPhotoModal.setAttribute('aria-hidden', 'true');
+        addPhotoModal.removeAttribute('aria-modal');
+    };
+
+    const stopPropagation = function (e) {
+        e.stopPropagation();
+    };
+
+    addPhotoModal.addEventListener('click', closeAddPhotoModal);
+    addPhotoModal.querySelector('.js-modal-close').addEventListener('click', closeAddPhotoModal);
+    addPhotoModal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
+
+    openAddPhotoButton.addEventListener('click', openAddPhotoModal);
 }
 
 // Supprimer le work
