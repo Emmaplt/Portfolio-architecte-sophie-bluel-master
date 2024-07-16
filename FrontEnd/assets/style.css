@@ -342,7 +342,7 @@ footer nav ul {
 
 .modal-wrapper {
 	width: 630px;
-	height: 630px;
+	height: 688px;
 	border-radius: 10px;
 	background-color: #fff;
 	animation: slideFromTop .5s both;
@@ -359,31 +359,47 @@ footer nav ul {
 }
 
 .js-modal-close {
-	border: none;
+	border:none;
 	background-color: #fff;
-	cursor: pointer;
+	padding-top: 20px;
+	width: 100%;
 	display: flex;
-	flex-direction: row;
-	justify-content: flex-end;
-	align-items: flex-end;
-	align-content: flex-end;
+	justify-content: end;
+	padding-right: 30px;
+	font-size: 20px;
+	border-radius: 10px;
+}
+
+.js-modal-close .button-close {
+	cursor: pointer;
+}
+
+#title-modal {
+	text-align: center;
+	font-size: 26px;
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
 
 .gallery-modal {
-    display: grid;
+    display: flex;
+	align-content: center;
+	justify-content: center;
+	width: 100%;
+	height: 55%;
     grid-template-columns: repeat(auto-fit, minmax(102px, 1fr));
-    gap: 10px;
-    padding: 10px;
+    gap: 15px;
     overflow-y: auto;
 }
 
 .gallery-modal figure {
     position: relative;
     margin: 0;
+	width: 76px;
 }
 
 .gallery-modal img {
-    width: 100%;
+    width: 76px;
     height: auto;
     display: block;
 }
@@ -396,10 +412,31 @@ footer nav ul {
     color: white;
     background-color: black;
     padding: 5px;
-    width: 17px;
-    height: 17px;
+    width: 10px;
+    height: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
 	border-radius: 20%;
+	font-size: 12px;
+}
+
+.button-modal2 {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	border-top: 1px solid #B3B3B3;
+	padding-top: 50px;
+	margin: 0 70px;
+}
+
+.button-text {
+	font-family: Syne;
+	font-size: 16px;
+	color: white;
+	border-radius: 60px;
+    padding: 10px 60px;
+    background-color: #1D6154;
+    cursor: pointer;
+	border: 1px solid #1D6154
 }
