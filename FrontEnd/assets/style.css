@@ -383,19 +383,20 @@ footer nav ul {
 
 .gallery-modal {
     display: flex;
-	align-content: center;
-	justify-content: center;
-	width: 100%;
+	flex-wrap: wrap;
+	padding-bottom: 20px;
 	height: 55%;
     grid-template-columns: repeat(auto-fit, minmax(102px, 1fr));
-    gap: 15px;
+    gap: 10px;
     overflow-y: auto;
+	margin: 0 90px;
 }
 
 .gallery-modal figure {
     position: relative;
     margin: 0;
 	width: 76px;
+	height: 102px;
 }
 
 .gallery-modal img {
@@ -427,7 +428,7 @@ footer nav ul {
 	align-content: center;
 	border-top: 1px solid #B3B3B3;
 	padding-top: 50px;
-	margin: 0 70px;
+	margin: 0 90px;
 }
 
 .button-text {
