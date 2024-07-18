@@ -486,13 +486,15 @@ footer nav ul {
 	align-items: center;
 }
 
+.photo-container .photo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .photo-container .icone-photo {
 	color: #CBD6DC;
 	font-size: 76px;
-}
-
-.photo-container .button-add-photo input {
-	display: none;
 }
 
 .photo-container .button-add-photo {
@@ -505,6 +507,10 @@ footer nav ul {
 	color:#306685;
 	font-weight: 600;
 	margin-top: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
 }
 
 .photo-container span {
