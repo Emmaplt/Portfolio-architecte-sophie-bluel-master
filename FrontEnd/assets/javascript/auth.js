@@ -86,6 +86,23 @@ function initializeGalleryModal() {
     });
 }
 
+// Supprimer le work
+function deleteWork(id) {
+    fetch(`${api}/works/${id}`, {
+        method: "DELETE",
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            fetchData();
+        } else {
+            console.error('Failed to delete work');
+        }
+    });
+}
+
 // Fonction pour initialiser la modale d'ajout de photo
 function initializeAddPhotoModal() {
     const addPhotoModal = document.querySelector("#modal-add-photo");
@@ -122,19 +139,4 @@ function initializeAddPhotoModal() {
     openAddPhotoButton.addEventListener('click', openAddPhotoModal);
 }
 
-// Supprimer le work
-function deleteWork(id) {
-    fetch(`${api}/works/${id}`, {
-        method: "DELETE",
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-        }
-    })
-    .then(response => {
-        if (response.ok) {
-            fetchData();
-        } else {
-            console.error('Failed to delete work');
-        }
-    });
-}
+
