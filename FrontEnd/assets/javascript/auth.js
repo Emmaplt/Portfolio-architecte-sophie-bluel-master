@@ -126,6 +126,21 @@ function initializeAddPhotoModal() {
         addPhotoModal.style.display = 'none';
         addPhotoModal.setAttribute('aria-hidden', 'true');
         addPhotoModal.removeAttribute('aria-modal');
+        document.querySelector("#modal1").style.display = 'none';  // Assure que la première modal est fermée
+    };
+
+    const returnToModal1 = function (e) {
+        e.preventDefault();
+        addPhotoModal.style.display = 'none';
+        addPhotoModal.setAttribute('aria-hidden', 'true');
+        addPhotoModal.removeAttribute('aria-modal');
+
+        const modal1 = document.querySelector("#modal1");
+        if (modal1) {
+            modal1.style.display = 'flex';
+            modal1.removeAttribute('aria-hidden');
+            modal1.setAttribute('aria-modal', 'true');
+        }
     };
 
     const stopPropagation = function (e) {
@@ -134,9 +149,9 @@ function initializeAddPhotoModal() {
 
     addPhotoModal.addEventListener('click', closeAddPhotoModal);
     addPhotoModal.querySelector('.js-modal-close').addEventListener('click', closeAddPhotoModal);
+    addPhotoModal.querySelector('.js-modal-return').addEventListener('click', returnToModal1);
     addPhotoModal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation);
 
     openAddPhotoButton.addEventListener('click', openAddPhotoModal);
 }
-
 
