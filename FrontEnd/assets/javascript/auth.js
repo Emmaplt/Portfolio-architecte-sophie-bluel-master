@@ -155,3 +155,47 @@ function initializeAddPhotoModal() {
     openAddPhotoButton.addEventListener('click', openAddPhotoModal);
 }
 
+// Fonction pour envoyer les données du formulaire d'ajout de projet
+function addProject(formData) {
+    fetch(`${api}/works`, {
+        method: "POST",
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+        },
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            fetchData(); // Rafraîchir les données pour afficher le nouveau projet ajouté
+        } else {
+            return response.text().then(text => {
+                console.error('Failed to add project:', text);
+                // Afficher un message d'erreur à l'utilisateur ou gérer l'erreur d'une autre manière
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error adding project:', error);
+        // Gérer l'erreur ici, par exemple afficher un message d'erreur générique à l'utilisateur
+    });
+}
+
+// Initialiser la gestion de l'envoi du formulaire
+function initializeFormHandling() {
+    const photoForm = document.getElementById('photoForm');
+
+    if (photoForm) {
+        photoForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(photoForm);
+            addProject(formData);
+        });
+    } else {
+        console.error('Photo form not found');
+    }
+}
+
+// Appeler la fonction d'initialisation
+initializeFormHandling();
+
