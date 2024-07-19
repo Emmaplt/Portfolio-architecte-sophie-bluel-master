@@ -44,11 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-//Fonction de création de fonctionnalité de ma page modal 
-function initializeGalleryModal() {
-
     let modal = document.querySelector("#modal1");
- 
 
     //Ouvrir la page modal
     const openModal = function (e) {
@@ -65,7 +61,8 @@ function initializeGalleryModal() {
 
     //Fermer la page modal
     const closeModal = function (e) {
-        e.preventDefault()
+        if(e)
+            e.preventDefault()
         if (modal === null) return
             modal.style.display = 'none';
             modal.setAttribute('aria-modal', 'true');
@@ -76,6 +73,9 @@ function initializeGalleryModal() {
     const stopPropagation = function (e) {
         e.stopPropagation()
     }
+
+//Fonction de création de fonctionnalité de ma page modal 
+function initializeGalleryModal() {
 
     modal.addEventListener('click', closeModal);
     modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
@@ -103,50 +103,47 @@ function deleteWork(id) {
     });
 }
 
+const addPhotoModal = document.querySelector("#modal-add-photo");
+const openAddPhotoButton = document.querySelector(".js-open-add-photo-modal");
+
+// Vérifier si la modal et le bouton existent
+if (!addPhotoModal || !openAddPhotoButton) {
+    console.error('Add photo modal or open button not found');
+}
+
+const openAddPhotoModal = function (e) {
+    e.preventDefault();
+    addPhotoModal.style.display = 'flex';
+    addPhotoModal.removeAttribute('aria-hidden');
+    addPhotoModal.setAttribute('aria-modal', 'true');
+};
+
+const closeAddPhotoModal = function (e) {
+    if(e)
+    e.preventDefault();
+    addPhotoModal.style.display = 'none';
+    addPhotoModal.setAttribute('aria-hidden', 'true');
+    addPhotoModal.removeAttribute('aria-modal');
+    document.querySelector("#modal1").style.display = 'none';  // Assure que la première modal est fermée
+};
+
+const returnToModal1 = function (e) {
+    e.preventDefault();
+    addPhotoModal.style.display = 'none';
+    addPhotoModal.setAttribute('aria-hidden', 'true');
+    addPhotoModal.removeAttribute('aria-modal');
+
+    const modal1 = document.querySelector("#modal1");
+    if (modal1) {
+        modal1.style.display = 'flex';
+        modal1.removeAttribute('aria-hidden');
+        modal1.setAttribute('aria-modal', 'true');
+    }
+};
+
 // Fonction pour initialiser la modale d'ajout de photo
 function initializeAddPhotoModal() {
-    const addPhotoModal = document.querySelector("#modal-add-photo");
-    const openAddPhotoButton = document.querySelector(".js-open-add-photo-modal");
-
-    // Vérifier si la modal et le bouton existent
-    if (!addPhotoModal || !openAddPhotoButton) {
-        console.error('Add photo modal or open button not found');
-        return;
-    }
-
-    const openAddPhotoModal = function (e) {
-        e.preventDefault();
-        addPhotoModal.style.display = 'flex';
-        addPhotoModal.removeAttribute('aria-hidden');
-        addPhotoModal.setAttribute('aria-modal', 'true');
-    };
-
-    const closeAddPhotoModal = function (e) {
-        e.preventDefault();
-        addPhotoModal.style.display = 'none';
-        addPhotoModal.setAttribute('aria-hidden', 'true');
-        addPhotoModal.removeAttribute('aria-modal');
-        document.querySelector("#modal1").style.display = 'none';  // Assure que la première modal est fermée
-    };
-
-    const returnToModal1 = function (e) {
-        e.preventDefault();
-        addPhotoModal.style.display = 'none';
-        addPhotoModal.setAttribute('aria-hidden', 'true');
-        addPhotoModal.removeAttribute('aria-modal');
-
-        const modal1 = document.querySelector("#modal1");
-        if (modal1) {
-            modal1.style.display = 'flex';
-            modal1.removeAttribute('aria-hidden');
-            modal1.setAttribute('aria-modal', 'true');
-        }
-    };
-
-    const stopPropagation = function (e) {
-        e.stopPropagation();
-    };
-
+  
     addPhotoModal.addEventListener('click', closeAddPhotoModal);
     addPhotoModal.querySelector('.js-modal-close').addEventListener('click', closeAddPhotoModal);
     addPhotoModal.querySelector('.js-modal-return').addEventListener('click', returnToModal1);
@@ -167,6 +164,7 @@ function addProject(formData) {
     .then(response => {
         if (response.ok) {
             fetchData(); // Rafraîchir les données pour afficher le nouveau projet ajouté
+            closeAddPhotoModal();
         } else {
             return response.text().then(text => {
                 console.error('Failed to add project:', text);
@@ -183,6 +181,23 @@ function addProject(formData) {
 // Initialiser la gestion de l'envoi du formulaire
 function initializeFormHandling() {
     const photoForm = document.getElementById('photoForm');
+    const input= document.getElementById('imageInput');
+    const img= document.getElementById('imagePreviewContainer');
+    const photoWrapper= document.querySelector('.photo-wrapper');
+
+    input.addEventListener('change',function(event) {
+        console.log('test');
+        const file = input.files;
+        if (file) {
+                const fileReader = new FileReader();
+                fileReader.onload = event => {
+                img.setAttribute('src', event.target.result);
+                img.style.display= 'block';
+                photoWrapper.style.display= 'none';
+            }
+            fileReader.readAsDataURL(file[0]);
+        }
+    })
 
     if (photoForm) {
         photoForm.addEventListener('submit', function(event) {

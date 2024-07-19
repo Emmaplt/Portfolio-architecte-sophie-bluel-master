@@ -519,6 +519,11 @@ footer nav ul {
 	margin-top: 7px;
 }
 
+.image-preview-container {
+	display: none;
+	width: 150px;
+}
+
 /* Barre à remplir */
 
 .add-title {
@@ -589,3 +594,4 @@ footer nav ul {
 		border: 1px solid #1D6154;
 		width: 237px;
 }
+
