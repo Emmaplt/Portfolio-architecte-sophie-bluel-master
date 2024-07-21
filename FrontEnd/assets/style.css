@@ -521,7 +521,8 @@ footer nav ul {
 
 .image-preview-container {
 	display: none;
-	width: 150px;
+	max-width: 420px;
+	height: 169px;
 }
 
 /* Barre à remplir */
