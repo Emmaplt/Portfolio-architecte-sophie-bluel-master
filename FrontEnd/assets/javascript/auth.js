@@ -119,12 +119,42 @@ const openAddPhotoModal = function (e) {
     addPhotoModal.setAttribute('aria-modal', 'true');
 };
 
+// Fonction pour vérifier si tous les champs sont remplis
+function validateForm() {
+    const imageInput = document.getElementById('imageInput');
+    const titreInput = document.getElementById('titre');
+    const categoriesSelect = document.getElementById('categories');
+    const submitButton = document.getElementById('submitButton');
+
+    // Vérifiez si tous les champs requis sont remplis
+    if (imageInput.files.length > 0 && titreInput.value.trim() !== '' && categoriesSelect.value !== '') {
+        submitButton.disabled = false;
+        submitButton.classList.remove('valider-photo:disabled');
+    } else {
+        submitButton.disabled = true;
+        submitButton.classList.add('valider-photo:disabled');
+    }
+}
+
+// Ajoutez des écouteurs d'événements pour les champs du formulaire
+const imageInput = document.getElementById('imageInput');
+const titreInput = document.getElementById('titre');
+const categoriesSelect = document.getElementById('categories');
+
+imageInput.addEventListener('change', validateForm);
+titreInput.addEventListener('input', validateForm);
+categoriesSelect.addEventListener('change', validateForm);
+
+// Initialisez l'état du bouton lors du chargement de la page
+validateForm();
+
 // Fonction pour réinitialiser le formulaire et l'aperçu de l'image de la deuxième modal
 function resetAddPhotoForm() {
     const photoForm = document.getElementById('photoForm');
     const imageInput = document.getElementById('imageInput');
     const imagePreviewContainer = document.getElementById('imagePreviewContainer');
     const photoWrapper = document.querySelector('.photo-wrapper');
+    const submitButton = document.getElementById('submitButton');
 
     if (photoForm) {
         photoForm.reset(); // Réinitialiser le formulaire
@@ -139,6 +169,9 @@ function resetAddPhotoForm() {
     if (photoWrapper) {
         photoWrapper.style.display = 'flex'; // Afficher le conteneur de la photo par défaut
     }
+    // Réinitialiser l'état du bouton
+    submitButton.disabled = true;
+    submitButton.classList.add('valider-photo:disabled');
 }
 
 // Fermer la deuxième modal et réinitialiser le formulaire

@@ -596,3 +596,14 @@ footer nav ul {
 		width: 237px;
 }
 
+.submit-button .valider-photo:disabled {
+	font-family: Syne;
+	font-size: 16px;
+	color: white;
+	border-radius: 60px;
+	padding: 10px 60px;
+	background-color: #A7A7A7;
+	border: 1px solid #A7A7A7;
+	width: 237px;
+}
+
