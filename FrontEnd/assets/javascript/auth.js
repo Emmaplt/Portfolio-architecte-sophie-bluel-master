@@ -111,6 +111,7 @@ if (!addPhotoModal || !openAddPhotoButton) {
     console.error('Add photo modal or open button not found');
 }
 
+// Ouvrir la deuxième modal
 const openAddPhotoModal = function (e) {
     e.preventDefault();
     addPhotoModal.style.display = 'flex';
@@ -118,6 +119,29 @@ const openAddPhotoModal = function (e) {
     addPhotoModal.setAttribute('aria-modal', 'true');
 };
 
+// Fonction pour réinitialiser le formulaire et l'aperçu de l'image de la deuxième modal
+function resetAddPhotoForm() {
+    const photoForm = document.getElementById('photoForm');
+    const imageInput = document.getElementById('imageInput');
+    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+    const photoWrapper = document.querySelector('.photo-wrapper');
+
+    if (photoForm) {
+        photoForm.reset(); // Réinitialiser le formulaire
+    }
+    if (imageInput) {
+        imageInput.value = ""; // Réinitialiser l'input file
+    }
+    if (imagePreviewContainer) {
+        imagePreviewContainer.setAttribute('src', '#'); // Réinitialiser l'aperçu de l'image
+        imagePreviewContainer.style.display = 'none'; // Cacher l'aperçu de l'image
+    }
+    if (photoWrapper) {
+        photoWrapper.style.display = 'flex'; // Afficher le conteneur de la photo par défaut
+    }
+}
+
+// Fermer la deuxième modal et réinitialiser le formulaire
 const closeAddPhotoModal = function (e) {
     if(e)
     e.preventDefault();
@@ -125,8 +149,12 @@ const closeAddPhotoModal = function (e) {
     addPhotoModal.setAttribute('aria-hidden', 'true');
     addPhotoModal.removeAttribute('aria-modal');
     document.querySelector("#modal1").style.display = 'none';  // Assure que la première modal est fermée
+
+    //Appeler la fonction pour rénitialiser le formulaire
+    resetAddPhotoForm();
 };
 
+// Renvoyer à la première modal et réinitialiser le formulaire de la deuxième modal
 const returnToModal1 = function (e) {
     e.preventDefault();
     addPhotoModal.style.display = 'none';
