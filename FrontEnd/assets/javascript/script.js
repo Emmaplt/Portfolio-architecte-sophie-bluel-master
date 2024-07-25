@@ -73,6 +73,7 @@ function fetchCategories() {
         .then(response => response.json())
         .then(categories => {
             const filterContainer = document.getElementById("filters");
+            const select = document.getElementById("categories");
             filterContainer.innerHTML = ""; // Efface le contenu précédent
 
             // Ajoute un bouton pour "Tous"
@@ -110,6 +111,10 @@ function fetchCategories() {
                         }
                     })
                 });
+                const option = document.createElement("option");
+                option.value = category.id;
+                option.textContent = category.name;
+                select.appendChild(option);
             });
 
             // Appel initial pour afficher tous les travaux

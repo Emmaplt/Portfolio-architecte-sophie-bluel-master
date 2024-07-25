@@ -247,7 +247,6 @@ function initializeFormHandling() {
     const photoWrapper= document.querySelector('.photo-wrapper');
 
     input.addEventListener('change',function(event) {
-        console.log('test');
         const file = input.files;
         if (file) {
                 const fileReader = new FileReader();
