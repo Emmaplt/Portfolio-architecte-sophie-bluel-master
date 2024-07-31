@@ -125,7 +125,22 @@ function validateForm() {
     const titreInput = document.getElementById('titre');
     const categoriesSelect = document.getElementById('categories');
     const submitButton = document.getElementById('submitButton');
+    const maxSize = 4 * 1024 * 1024; // 4 Mo en octets
 
+    // Vérifiez si le fichier est trop volumineux ou de mauvais format
+    if (imageInput.files.length > 0) {
+        const file = imageInput.files[0];
+        const fileType = file.type;
+
+        if (file.size > maxSize) {
+            alert("Le fichier est trop volumineux. La taille maximale est de 4 Mo.");
+            imageInput.value = ""; // Réinitialiser l'input file
+        } else if (!['image/jpeg', 'image/png'].includes(fileType)) {
+            alert("Le format de fichier n'est pas valide. Seuls les fichiers JPG et PNG sont autorisés.");
+            imageInput.value = ""; // Réinitialiser l'input file
+        }
+    }
+    
     // Vérifiez si tous les champs requis sont remplis
     if (imageInput.files.length > 0 && titreInput.value.trim() !== '' && categoriesSelect.value !== '') {
         submitButton.disabled = false;
